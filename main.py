@@ -1,15 +1,18 @@
 import socket
 import sys
 import threading
+import traceback
 
 
 def handle(server, client, clients):
     """Incoming messages handler"""
-
     while True:
         # Receive new data while it's not empty
         # (it happens when the client is disconnected)
-        data = client.recv(2048)
+        try:
+            data = client.recv(2048)
+        except:
+            data = None
 
         if not data:
             break
@@ -19,12 +22,17 @@ def handle(server, client, clients):
         # If the text is not empty...
         if text.strip():
             # ...then broadcast it to all connected clients
-            for c in clients:
-                c.sendall(text.encode("utf-8", "replace"))
+            for c in clients.copy():
+                try:
+                    c.sendall(text.encode("utf-8", "replace"))
+                except:
+                    clients.remove(c)
 
     # Remove client on disconnect or error
-    clients.remove(client)
-    client.close()
+    try:
+        client.close()
+    except:
+        pass
 
 
 if len(sys.argv) < 2:
