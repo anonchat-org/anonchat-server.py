@@ -2,6 +2,7 @@ import socket
 import sys
 import threading
 import traceback
+import json
 
 
 def handle(server, client, clients):
@@ -22,6 +23,16 @@ def handle(server, client, clients):
         # If the text is not empty...
         if text.strip():
             # ...then broadcast it to all connected clients
+
+            # But, check if v1 or v2 and package
+            try:
+                text = json.loads(text)
+
+            except:
+                print("[INFO] Got v1 package.")
+                text = {"user": "V1-Package", "msg": text}
+
+            text = json.dumps(text, ensure_ascii=False)
             for c in clients.copy():
                 try:
                     c.sendall(text.encode("utf-8", "replace"))
@@ -46,7 +57,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.bind(("0.0.0.0", int(sys.argv[1])))
 server.listen()
-print(f"Running at 0.0.0.0:{sys.argv[1]}")
+print(f"[INFO] Running at 0.0.0.0:{sys.argv[1]}")
 
 # Wait for new connection, add it to list, and then run a handler
 while True:
