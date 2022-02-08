@@ -5,7 +5,7 @@ import traceback
 import json
 
 
-def handle(server, client, clients):
+def handle(server, client):
     """Incoming messages handler"""
     while True:
         # Receive new data while it's not empty
@@ -42,6 +42,7 @@ def handle(server, client, clients):
     # Remove client on disconnect or error
     try:
         client.close()
+        clients.remove(client)
     except:
         pass
 
@@ -63,4 +64,4 @@ print(f"[INFO] Running at 0.0.0.0:{sys.argv[1]}")
 while True:
     client, addr = server.accept()
     clients.add(client)
-    threading.Thread(target=handle, args=(server, client, clients)).start()
+    threading.Thread(target=handle, args=(server, client)).start()
