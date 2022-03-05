@@ -4,6 +4,7 @@ import threading
 import traceback
 import json
 
+import _http as htclient
 
 def handle(server, client):
     """Incoming messages handler"""
@@ -22,6 +23,23 @@ def handle(server, client):
 
         # If the text is not empty...
         if text.strip():
+            # ...if HTTP
+            if text.split("\n")[0].startswith("GET") and text.split("\n")[0].split(" ")[-1].startswith("HTTP"):
+                # ...send default page
+                
+                print("[INFO] Got HTTP Package.")
+                print(f"[INFO] User-Agent is: {htclient.get_uagent(text)}")
+
+                try:
+                    htclient.send(client)
+                except:
+                    pass
+                clients.remove(client)
+                client.close()
+
+                return
+                
+                
             # ...then broadcast it to all connected clients
 
             # But, check if v1 or v2 and package

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>anonchat</title>
+</head>
+
+<style>
+    body {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 970px;
+
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        font-family: Lucida Console, Courier, monospace;
+    }
+
+    .green {
+        color: lime;
+    }
+</style>
+
+<body>
+    <h3>
+        <span class="green">anonchat</span> - a microprotocol for communication built using TCP sockets.</br>
+    </h3>
+
+    <p>
+        A server acts as a message distributor between the connected clients, while a client can send and recieve
+        messages.
+    </p>
+
+    <p>
+        A typical anonchat message is just a JSON encoded object which contains message text and (optionally) its
+        author. The socket has only one event: an incoming message. The protocol is simple as hell. It's very easy to
+        configure, extend and hack.
+    </p>
+
+    <p>
+        Example message object:
+        <span class="green">{"user": "calamity", "msg": "hey, how you doing today?"}</span></br>
+        Pretty simple, isn't it?
+    </p>
+
+    <p>
+        Also, there is a client and server protocol implementations written on various languages, like Dart, Python,
+        Rust, etc. You can see the source codes <a href="https://github.com/anonchat-org" class="green">here</a>.
+    </p>
+</body>
+
+</html>
