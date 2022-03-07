@@ -1,5 +1,5 @@
 # anonchat-server.py
-Python implementation of anonchat server
+Experimental python implementation of anonchat server v3
 
 ## Usage
 ```
