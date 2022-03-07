@@ -98,7 +98,8 @@ else:
         "serverName": "Server",
         "protocol": "v2",
         "motdEnable": False,
-        "motd": '\n// Welcome to the Server!\n'
+        "motd": '\n// Welcome to the Server!\n',
+        "federationToggle": False
     }
 
     with open("./server.json", "w", encoding="utf-8") as f:
