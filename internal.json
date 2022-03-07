@@ -1,0 +1,9 @@
+{
+	"version": "0.3",
+	"codename": "asrv.py",
+	"api": 3,
+	"http": {
+		"username_size": 32,
+		"message_size": 200
+	}
+}

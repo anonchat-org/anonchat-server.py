@@ -1,0 +1,7 @@
+{
+    "serverName": "Server",
+    "protocol": "v3",
+    "motdEnable": false,
+    "motd": "\n// Welcome to the Server!\n",
+	"federationsToggle": false
+}
